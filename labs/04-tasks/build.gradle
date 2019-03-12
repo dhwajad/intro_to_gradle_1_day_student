@@ -8,3 +8,29 @@
        Hint: http://www.gradle.org/docs/current/dsl/org.gradle.api.Task.html#org.gradle.api.Task:description
     7. Execute `gradle tasks` again.
 */
+
+import java.time.*
+
+task helloWorld {
+    description "Heloooo World printer"
+    group "Utility"
+    doLast {
+        println "World"
+    }
+    onlyIf {
+        true
+    }
+    println "runs during configuration"
+    doFirst {
+        println "Hello"
+    }
+}
+
+task printDate {
+    description "Date Printer"
+    group "Utility"
+    doLast {
+        println(new Date())
+        println LocalDate.now()
+    }
+}

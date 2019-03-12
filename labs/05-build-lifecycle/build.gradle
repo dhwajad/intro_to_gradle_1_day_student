@@ -8,14 +8,44 @@
     7. Execute the `hello` task and analyze the output.
 */
 
+task date {
+    dependsOn "hello", "whatever"
+    doLast {
+        println new Date()
+    }
+}
+
+task whatever {
+    doFirst {
+        println "whatever"
+    }
+}
+
 task hello {
     doLast {
         println "Hello World"
     }
 }
 
-task date {
-    doLast {
-        println new Date()
+task hi(type: Greeting)
+
+task hola(type: Greeting) {
+    doFirst {
+        println "Before Task Action"
     }
+    user "Dolly"
+    doLast {
+        println "After Task Action"
+    }
+}
+
+class Greeting extends DefaultTask {
+
+    String user = "World"
+
+    @TaskAction
+    void sayHello() {
+        println "Hello, $user!"
+    }
+
 }
